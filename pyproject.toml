@@ -1,0 +1,17 @@
+[tool.pdm]
+
+[project]
+name = "pypotlib"
+version = "0.0.1"
+description = "Python bindings and ASE adaptors for potlib"
+authors = [
+    {name = "Rohit Goswami", email = "rog32@hi.is"},
+]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
