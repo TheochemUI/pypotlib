@@ -1,5 +1,7 @@
 # Added
 subprojects/potlib/
+compile_commands.json
+pdm.lock
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
