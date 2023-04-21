@@ -49,6 +49,7 @@ py.extension_module(
   sources : [
     'bindings/py_wrapper.cc',
     'bindings/py_pottypes.cc',
+    'bindings/py_potential.cc',
   ],
   dependencies: _deps,
   link_with: _linkto,

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <utility>
 
 // Basics
 #include "../subprojects/potlib/CppCore/src/pot_types.hpp"
@@ -19,5 +20,7 @@ using namespace pybind11::literals;   // For ""_a
 namespace py = pybind11;              // Convention
 
 // Forward declarations
-// Potentials
+// Basic Types
 void py_pottypes(py::module_ &m);
+// Potentials
+void py_potential(py::module_ &m);
