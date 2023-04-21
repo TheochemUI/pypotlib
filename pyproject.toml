@@ -3,7 +3,7 @@
 [project]
 name = "pypotlib"
 version = "0.0.1"
-description = "Python bindings and ASE adaptors for potlib"
+description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
 ]
@@ -13,5 +13,5 @@ readme = "README.md"
 license = {text = "MIT"}
 
 [build-system]
-requires = ["meson-python"]
+requires = ["wheel", "setuptools", "pybind11", "meson-python"]
 build-backend = "mesonpy"
