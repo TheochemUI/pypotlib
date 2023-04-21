@@ -25,3 +25,4 @@ void py_pottypes(py::module_ &m);
 // Potentials
 void py_potential(py::module_ &m);
 void py_ljpot(py::module_ &m);
+void py_cuh2pot(py::module_ &m);

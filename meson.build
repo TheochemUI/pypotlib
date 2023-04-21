@@ -51,6 +51,7 @@ py.extension_module(
     'bindings/py_pottypes.cc',
     'bindings/py_potential.cc',
     'bindings/LennardJones/py_ljpot.cc',
+    'bindings/CuH2/py_cuh2pot.cc',
   ],
   dependencies: _deps,
   link_with: _linkto,

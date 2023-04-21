@@ -5,4 +5,5 @@ PYBIND11_MODULE(pypotlib, m) {
     py_pottypes(m);
     py_potential(m);
     py_ljpot(m);
+    py_cuh2pot(m);
 }
