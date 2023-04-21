@@ -50,6 +50,7 @@ py.extension_module(
     'bindings/py_wrapper.cc',
     'bindings/py_pottypes.cc',
     'bindings/py_potential.cc',
+    'bindings/LennardJones/py_ljpot.cc',
   ],
   dependencies: _deps,
   link_with: _linkto,
