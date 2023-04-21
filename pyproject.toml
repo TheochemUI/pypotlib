@@ -7,7 +7,9 @@ description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
 ]
-dependencies = []
+dependencies = [
+    "includeigen>=0.1",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
