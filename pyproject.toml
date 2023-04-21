@@ -15,3 +15,20 @@ license = {text = "MIT"}
 [build-system]
 requires = ["wheel", "setuptools", "pybind11", "meson-python"]
 build-backend = "mesonpy"
+
+[tool.cibuildwheel.linux]
+manylinux-x86_64-image = "manylinux2014"
+manylinux-i686-image = "manylinux2014"
+environment = { CC="clang", CXX = "clang++", LDFLAGS="-Wl,--strip-debug", RUNNER_OS="Linux" }
+before-all = """
+    pip install meson cmake &&
+    meson wrap install spdlog &&
+    meson wrap install eigen &&
+    meson wrap install fmt &&
+    meson wrap install pybind11
+"""
+test-command = "echo 'installed'"
+
+# [[tool.cibuildwheel.overrides]]
+# select = "*-musllinux*"
+# before-all = "apk add mylib" # hasn't got new enough Eigen versions, uses Apline 3.12
