@@ -13,5 +13,5 @@ readme = "README.md"
 license = {text = "MIT"}
 
 [build-system]
-requires = ["setuptools>=61", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["meson-python"]
+build-backend = "mesonpy"
