@@ -36,8 +36,3 @@ repair-wheel-command = ""
 [tool.cibuildwheel.macos]
 environment = { RUNNER_OS="macOS" }
 before-all = "brew install gfortran && brew unlink gfortran && brew link gfortran"
-
-[[tool.cibuildwheel.overrides]]
-select = "*-musllinux*"
-# Kanged from SciPy
-before-build = "bash {project}/wheel_tools/cibw_before_build_linux.sh {project}"
