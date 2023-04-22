@@ -1,5 +1,5 @@
 project('pypotlib', 'cpp',
-       version: '0.0.3',
+       version: '0.0.4',
   default_options : ['warning_level=2', 'cpp_std=c++17'])
 # IMPORTANT!! warning_level=3 passes -fimplicit-none
 # Many of the older Fortran codes need implicit typing
