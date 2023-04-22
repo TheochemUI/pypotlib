@@ -1,7 +1,9 @@
 # Added
-subprojects/potlib/
+subprojects/*
+!subprojects/potlib.wrap
 compile_commands.json
 pdm.lock
+wheelhouse/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
