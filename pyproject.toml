@@ -25,9 +25,12 @@ before-all = """
     meson wrap install pybind11
 """
 test-command = "echo 'installed'"
+# XXX: This shouldn't be empty, --lib-sdir .
+# Normally is auditwheel repair -w {dest_dir} {wheel}
 repair-wheel-command = ""
 
 [tool.cibuildwheel.macos]
+environment = { RUNNER_OS="macOS" }
 before-all = "brew install gfortran && brew unlink gfortran && brew link gfortran"
 # [[tool.cibuildwheel.overrides]]
 # select = "*-musllinux*"
