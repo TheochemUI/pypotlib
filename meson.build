@@ -12,12 +12,6 @@ _args = [cpp_args] # Extra arguments
 _deps = [] # Dependencies
 _linkto = [] # All the sub-libraries (potentials)
 
-# Add conditionals
-if host_system == 'darwin'
-  _args += ['-DOSX=TRUE']
-  add_global_arguments(['-faligned-allocation'], language: 'cpp')
-endif
-
 # Languages
 add_languages('c', required: true)
 add_languages('fortran', required: true)
