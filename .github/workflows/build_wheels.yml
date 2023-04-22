@@ -17,7 +17,7 @@ jobs:
         # https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
         buildplat:
           - [ubuntu-20.04, manylinux_x86_64]
-          # - [ubuntu-20.04, musllinux_x86_64] # No OpenBlas, too slow to build
+          - [ubuntu-20.04, musllinux_x86_64] # No OpenBlas, no test
           - [macos-12, macosx_x86_64]
           # - [windows-2019, win_amd64]
         python: ["cp310", "cp311"]

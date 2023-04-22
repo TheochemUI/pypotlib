@@ -32,6 +32,8 @@ test-command = "echo 'installed'"
 # XXX: This shouldn't be empty, --lib-sdir .
 # Normally is auditwheel repair -w {dest_dir} {wheel}
 repair-wheel-command = ""
+# Openblas for musllinux is painful, so don't install / test
+test-skip = "*-musllinux*"
 
 [tool.cibuildwheel.macos]
 environment = { RUNNER_OS="macOS" }
