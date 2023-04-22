@@ -54,3 +54,19 @@ py.extension_module(
   install: true,
   subdir: 'pypotlib/'
 )
+
+# pypotlib, main package
+py.install_sources([
+    'pypotlib/__init__.py',
+  ],
+  pure: false, # install next to compiled extension
+  subdir: 'pypotlib'
+)
+
+# Adapters
+py.install_sources([
+    'pypotlib/ase_adapters.py',
+  ],
+  pure: false,
+  subdir: 'pypotlib'
+)
