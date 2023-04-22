@@ -36,6 +36,8 @@ repair-wheel-command = ""
 [tool.cibuildwheel.macos]
 environment = { RUNNER_OS="macOS" }
 before-all = "brew install gfortran && brew unlink gfortran && brew link gfortran"
-# [[tool.cibuildwheel.overrides]]
-# select = "*-musllinux*"
-# before-all = "apk add mylib" # hasn't got new enough Eigen versions, uses Apline 3.12
+
+[[tool.cibuildwheel.overrides]]
+select = "*-musllinux*"
+before-all = "apk add py3-scipy" # hasn't got new enough Eigen versions, uses Apline 3.12
+# py3-scipy includes openblas
