@@ -2,7 +2,7 @@
 
 [project]
 name = "pypotlib"
-version = "0.0.5"
+version = "0.0.6"
 description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
@@ -15,6 +15,9 @@ dependencies = [
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
+
+[project.urls]
+"Source Code" = "https://github.com/TheochemUI/pypotlib"
 
 [build-system]
 requires = ["wheel", "setuptools", "pybind11", "meson-python"]
