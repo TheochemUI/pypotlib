@@ -39,5 +39,5 @@ before-all = "brew install gfortran && brew unlink gfortran && brew link gfortra
 
 [[tool.cibuildwheel.overrides]]
 select = "*-musllinux*"
-before-all = "apk add py3-scipy" # hasn't got new enough Eigen versions, uses Apline 3.12
-# py3-scipy includes openblas
+# Kanged from SciPy
+before-build = "bash {project}/wheel_tools/cibw_before_build_linux.sh {project}"
