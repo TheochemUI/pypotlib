@@ -1,6 +1,6 @@
 #include "py_wrapper.hpp"
 
-PYBIND11_MODULE(pypotlib, m) {
+PYBIND11_MODULE(cpot, m) {
     // Potentials
     py_pottypes(m);
     py_potential(m);

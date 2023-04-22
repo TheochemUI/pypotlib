@@ -38,17 +38,19 @@ _deps += [dependency('python3'),
           dependency('pybind11'),
           declare_dependency(link_args: '-lstdc++') ]
 
+# cpot, for the bindings to potlib
 py.extension_module(
-  'pypotlib',
+  'cpot',
   sources : [
-    'bindings/py_wrapper.cc',
-    'bindings/py_pottypes.cc',
-    'bindings/py_potential.cc',
-    'bindings/LennardJones/py_ljpot.cc',
-    'bindings/CuH2/py_cuh2pot.cc',
+    'pyb11_srcs/py_wrapper.cc',
+    'pyb11_srcs/py_pottypes.cc',
+    'pyb11_srcs/py_potential.cc',
+    'pyb11_srcs/LennardJones/py_ljpot.cc',
+    'pyb11_srcs/CuH2/py_cuh2pot.cc',
   ],
   dependencies: _deps,
   link_with: _linkto,
   cpp_args : _args,
-  install: true
+  install: true,
+  subdir: 'pypotlib/'
 )
