@@ -1,5 +1,6 @@
 # Build on every branch push, tag push, and pull request change:
 # From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml
+name: Build wheels
 on: [push, pull_request]
 
 jobs:
