@@ -27,6 +27,8 @@ before-all = """
 test-command = "echo 'installed'"
 repair-wheel-command = ""
 
+[tool.cibuildwheel.macos]
+before-all = "brew install gfortran && brew unlink gfortran && brew link gfortran"
 # [[tool.cibuildwheel.overrides]]
 # select = "*-musllinux*"
 # before-all = "apk add mylib" # hasn't got new enough Eigen versions, uses Apline 3.12
