@@ -57,6 +57,31 @@ print(atoms.get_potential_energy())
 print(atoms.get_forces())
 ```
 
+To run an NEB with this, consider the following toy example:
+
+```python
+from ase import Atoms
+from ase.neb import NEB
+from ase.optimize import BFGS
+
+from pypotlib import cpot
+from pypotlib.ase_adapters import PyPotLibCalc
+
+atoms_initial = Atoms(symbols=['H', 'H'], positions=[(0, 0, 0), (0, 0, 1)])
+atoms_final = Atoms(symbols=['H', 'H'], positions=[(0, 0, 2), (0, 0, 3)])
+
+images = [atoms_initial]
+images += [atoms_initial.copy() for idx in range(3)]
+images += [atoms_final]
+
+for image in images:
+    image.calc = PyPotLibCalc(cpot.LJPot())
+
+neb = NEB(images)
+neb.interpolate(method = 'idpp')
+optimizer = BFGS(neb)
+optimizer.run(fmax=0.04)
+```
 
 
 # Contributions
