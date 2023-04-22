@@ -7,6 +7,7 @@ jobs:
   build_wheels:
     name: Build wheel for ${{ matrix.python }}-${{ matrix.buildplat[1] }}
     runs-on: ${{ matrix.buildplat[0] }}
+    environment: pypi
     strategy:
       # Ensure that a wheel builder finishes even if another fails
       fail-fast: false
