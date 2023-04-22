@@ -21,7 +21,7 @@ class PyPotLibCalc(Calculator):
         atmtypes = atoms.get_atomic_numbers()
         box = atoms.get_cell()
         if np.all(box == np.zeros(3)):
-            warnings.warn("Box is zero, setting to rectangular 100, 100, 100")
+            warnings.warn("Box is zero, setting to diagonal(100, 100, 100)")
             box = np.eye(3) * 100
         energy, forces = self.cpot(positions, atmtypes, box)
         self.results["energy"] = energy
