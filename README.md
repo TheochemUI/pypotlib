@@ -7,9 +7,19 @@ Python bindings and ASE adapters for `potlib`.
 The library consists of thin wrappers to `potlib` under `cpot` and a
 `PyPotLibCalc` class which is an `ase` calculator under `ase_adapters`.
 
-## Builds
+## Installation
 
-### Local usage
+This is [on PyPI](https://pypi.org/project/pypotlib), with wheels, so usage is simply:
+
+``` bash
+pip install pypotlib
+```
+
+Users are advised to not try to build from source, since the underlying `potlib`
+code includes `fortran` and `cpp` dependencies which can be slightly tricky to
+work with.
+
+### Local Development
 
 The easiest way is to use the environment file, compatible with `conda`,
 `mamba`, `micromamba` etc.
