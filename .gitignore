@@ -4,6 +4,7 @@ subprojects/*
 compile_commands.json
 pdm.lock
 wheelhouse/
+*.ipynb
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
