@@ -66,7 +66,16 @@ py.install_sources([
 # Adapters
 py.install_sources([
     'pypotlib/ase_adapters.py',
+    'pypotlib/aux.py',
   ],
   pure: false,
   subdir: 'pypotlib'
+)
+
+# Systems
+py.install_sources([
+    'pypotlib/systems/cu_slab_h2.py',
+  ],
+  pure: false,
+  subdir: 'pypotlib/systems'
 )
