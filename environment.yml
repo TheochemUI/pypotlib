@@ -19,7 +19,9 @@ dependencies:
   # Libraries
   - fmt
   - spdlog
+  - pybind11
   # Testing
   - gtest
   # Python
   - pdm
+  - pandas # Extra
