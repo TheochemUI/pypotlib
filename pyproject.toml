@@ -2,7 +2,7 @@
 
 [project]
 name = "pypotlib"
-version = "0.0.7"
+version = "0.0.8"
 description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
