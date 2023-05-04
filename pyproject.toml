@@ -9,10 +9,10 @@ authors = [
 ]
 # These are only if ase integration is requested, consider a group
 dependencies = [
-    "numpy>=1.24.2",
+    "numpy>=1.24.3",
     "ase>=3.22.1",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -29,8 +29,7 @@ manylinux-x86_64-image = "manylinux2014"
 manylinux-i686-image = "manylinux2014"
 environment = { RUNNER_OS="Linux" }
 before-all = """
-    pip install meson cmake &&
-    meson wrap install pybind11
+    pip install meson cmake
 """
 test-command = "echo 'installed'"
 # XXX: This shouldn't be empty, --lib-sdir .
