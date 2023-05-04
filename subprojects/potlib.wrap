@@ -1,7 +1,7 @@
 [wrap-git]
 directory=potlib
 url=https://github.com/TheochemUI/potlib.git
-revision=290f373
+revision=5d029b9
 
 [provide]
 potlib=git
