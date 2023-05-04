@@ -21,20 +21,15 @@ license = {text = "MIT"}
 "Bug Tracker" = "https://github.com/TheochemUI/pypotlib/issues"
 
 [build-system]
-requires = ["wheel", "setuptools", "pybind11", "meson-python"]
+requires = ["pybind11", "meson-python"]
 build-backend = "mesonpy"
 
 [tool.cibuildwheel.linux]
 manylinux-x86_64-image = "manylinux2014"
 manylinux-i686-image = "manylinux2014"
 environment = { RUNNER_OS="Linux" }
-before-all = """
-    pip install meson cmake
-"""
 test-command = "echo 'installed'"
-# XXX: This shouldn't be empty, --lib-sdir .
-# Normally is auditwheel repair -w {dest_dir} {wheel}
-repair-wheel-command = ""
+repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
 # Openblas for musllinux is painful, so don't install / test
 test-skip = "*-musllinux*"
 
