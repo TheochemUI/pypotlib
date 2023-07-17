@@ -19,24 +19,19 @@ cc = meson.get_compiler('c')
 cppc = meson.get_compiler('cpp')
 
 # ---------------------- Library Dependencies
-potlib_deps = subproject('potlib', version: '0.1').get_variable('_deps')
-potlib = subproject('potlib', version: '0.1').get_variable('_linkto')
-_deps += potlib_deps
-_linkto += potlib
+potlib_dep = declare_dependency(link_with: subproject('potlib', version: '0.1').get_variable('_linkto'),
+                               dependencies: subproject('potlib', version: '0.1').get_variable('_deps'),
+                               )
+_deps += potlib_dep
 
 # ---------------------- Bindings
 py_mod = import('python')
 py = py_mod.find_installation(pure: false)
-
-
-py = import('python').find_installation()
-python_dep = py.dependency()
-pyb11f_deps = [ python_dep ]
-
-
-_deps += [dependency('python3'),
-          dependency('pybind11'),
-          declare_dependency(link_args: '-lstdc++') ]
+pyb11_dep = [
+  py.dependency(),
+  dependency('pybind11')
+]
+_deps += [pyb11_dep]
 
 # cpot, for the bindings to potlib
 py.extension_module(
