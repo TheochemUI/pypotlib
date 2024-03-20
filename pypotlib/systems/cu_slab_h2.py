@@ -58,6 +58,37 @@ def set_slab_dist(atoms, dist):
     atoms.set_positions(cpos)
 
 
+def calculate_hh_and_hcu_distances(h_positions, ref_atoms):
+    """
+    Calculate the H-H distance and the specific H(midpoint)-slab distance based on the reference configuration.
+
+    Parameters:
+    - h_positions: A 6-element list or array with the coordinates of the H atoms [x1, y1, z1, x2, y2, z2].
+    - ref_atoms: An ASE Atoms object containing the reference configuration, including H and Cu atoms.
+
+    Returns:
+    - hh_distance: Distance between the two H atoms.
+    - hcu_distance: Distance from the H-H midpoint to the slab, considering the reference configuration.
+    """
+    # Reshape h_positions to a 2x3 matrix for easier manipulation
+    h_positions_matrix = np.array(h_positions).reshape(2, 3)
+
+    # Calculate H-H midpoint
+    midpoint = np.mean(h_positions_matrix, axis=0)
+
+    # Calculate H-H distance
+    hh_distance = np.linalg.norm(h_positions_matrix[0] - h_positions_matrix[1])
+
+    # Determine the maximum Z position of Cu atoms in the reference configuration as the reference slab surface
+    cu_positions = ref_atoms.positions[ref_atoms.numbers == 29]
+    max_cu_z = np.max(cu_positions[:, 2])
+
+    # Calculate the distance from the H-H midpoint to the reference slab surface
+    hcu_distance = midpoint[2] - max_cu_z
+
+    return hh_distance, hcu_distance
+
+
 def plt_data(
     _atms,
     hh_range=PltRange(low=0.4, high=3),
