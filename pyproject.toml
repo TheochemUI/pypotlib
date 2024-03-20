@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.0",
     "ase>=3.22.1",
     "cmcrameri>=1.8",
+    "matplotlib>=3.9.0.dev0",
 ]
 requires-python = ">=3.9"
 readme = "README.md"
@@ -55,5 +56,5 @@ target-version = ['py310']
 name = "nightly-scientific-python"
 url = "https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/"
 verify_ssl = true
-include_packages = ["scipy", "scipy-*", "numpy", "numpy-*"]
+include_packages = ["scipy", "scipy-*", "numpy", "numpy-*", "matplotlib", "matplotlib-*"]
 exclude_packages = ["*"]
