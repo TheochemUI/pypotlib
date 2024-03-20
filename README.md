@@ -25,8 +25,8 @@ The easiest way is to use the environment file, compatible with `conda`,
 `mamba`, `micromamba` etc.
 
 ```bash
-mamba env create -f environment.yml
-mamba activate rgpotpy
+micromamba env create -f environment.yml
+micromamba activate rgpotpy
 pdm install
 ```
 
