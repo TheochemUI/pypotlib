@@ -1,6 +1,12 @@
-__all__ = ["CuH2PotSlab", "FuncVal", "PltRange",
-           "PlotPtPos", "contour_plot", "plt_data",
-           "set_slab_dist"]
+__all__ = [
+    "CuH2PotSlab",
+    "FuncVal",
+    "PltRange",
+    "PlotPtPos",
+    "contour_plot",
+    "plt_data",
+    "set_slab_dist",
+]
 
 import warnings
 from collections import namedtuple
@@ -42,6 +48,7 @@ class CuH2PotSlab(Calculator):
         self.results["energy"] = energy - self._ezero.energy
         self.results["forces"] = forces
 
+
 def set_slab_dist(atoms, dist):
     h_ind = np.where(np.asarray(atoms.get_chemical_symbols()) == "H")[0]
     n_hatoms = len(h_ind)
@@ -50,12 +57,14 @@ def set_slab_dist(atoms, dist):
     cpos[-n_hatoms:, 2] = np.repeat(max_slab_z + dist, n_hatoms)
     atoms.set_positions(cpos)
 
-def plt_data(_atms, hh_range=PltRange(low=0.4, high=3),
-                  h2slab_range = PltRange(low=-0.05, high=5),
-                  n_points=PlotPoints(x_npt=60, y_npt=60)):
-    h_dists = np.linspace(
-        hh_range.low, hh_range.high, n_points.x_npt
-    )
+
+def plt_data(
+    _atms,
+    hh_range=PltRange(low=0.4, high=3),
+    h2slab_range=PltRange(low=-0.05, high=5),
+    n_points=PlotPoints(x_npt=60, y_npt=60),
+):
+    h_dists = np.linspace(hh_range.low, hh_range.high, n_points.x_npt)
     slab_dists = np.linspace(
         h2slab_range.low, h2slab_range.high, n_points.y_npt
     )
@@ -76,7 +85,8 @@ def plt_data(_atms, hh_range=PltRange(low=0.4, high=3),
             )
     return PlotPtPosData(h2pos=plt_h2pos, pltpts=plt_data)
 
-def contour_plot(data, _max_val = 5, _nlvls=500):
+
+def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None):
     x, y, energy = reshape_data(data)
     # Create a contour plot of the energy surface
     fig, ax = plt.subplots()
@@ -89,10 +99,22 @@ def contour_plot(data, _max_val = 5, _nlvls=500):
         extend="max",
         cmap=cmc.batlow,
     )
+    # Scatter
+    if scatter_points is not None:
+        scatter_points = np.array(scatter_points)
+        ax.scatter(
+            scatter_points[:, 0],
+            scatter_points[:, 1],
+            marker="+",
+            color="gray",
+        )
+
     # Add labels and title to the plot
     ax.set_xlabel("H-H distance")
     ax.set_ylabel("Slab distance")
-    ax.set_title('Energy Surface Contour Plot\nShifted by the zero of the energy')
+    ax.set_title(
+        "Energy Surface Contour Plot\nShifted by the zero of the energy"
+    )
     # Add a colorbar to the plot
     cbar = fig.colorbar(cs)
     # Show the plot
