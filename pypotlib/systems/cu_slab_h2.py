@@ -8,23 +8,22 @@ from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
 from ase.calculators.calculator import Calculator, all_changes
+import cmcrameri.cm as cmc
 
 from pypotlib import cpot
 from pypotlib.aux import reshape_data
 
 FuncVal = namedtuple("FuncVal", ["x", "y", "energy"])
 PltRange = namedtuple("PltRange", ["low", "high"])
-PlotPtPosData = namedtuple('PlotPtPosData', ['h2pos', 'pltpts'])
-PlotPoints = namedtuple('PlotPoints', ['x_npt', 'y_npt'])
+PlotPtPosData = namedtuple("PlotPtPosData", ["h2pos", "pltpts"])
+PlotPoints = namedtuple("PlotPoints", ["x_npt", "y_npt"])
+
 
 class CuH2PotSlab(Calculator):
     implemented_properties = ["energy", "forces"]
     discard_results_on_any_change = True
 
-    def __init__(self,
-                 e_zero=FuncVal(x=0.752542,
-                                y=5.0,
-                                energy=-697.311695)):
+    def __init__(self, e_zero=FuncVal(x=0.752542, y=5.0, energy=-697.311695)):
         Calculator.__init__(self)
         self.cpot = cpot.CuH2Pot()
         self._ezero = e_zero
@@ -88,6 +87,7 @@ def contour_plot(data, _max_val = 5, _nlvls=500):
         energy,
         levels=np.linspace(0, _max_val, _nlvls),
         extend="max",
+        cmap=cmc.batlow,
     )
     # Add labels and title to the plot
     ax.set_xlabel("H-H distance")
