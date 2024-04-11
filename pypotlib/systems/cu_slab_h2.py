@@ -6,6 +6,7 @@ __all__ = [
     "contour_plot",
     "plt_data",
     "set_slab_dist",
+    "calculate_hh_and_hcu_distances",
 ]
 
 import warnings
