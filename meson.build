@@ -61,7 +61,7 @@ py.install_sources([
 # Adapters
 py.install_sources([
     'pypotlib/ase_adapters.py',
-    'pypotlib/aux.py',
+    'pypotlib/_aux.py',
   ],
   pure: false,
   subdir: 'pypotlib'

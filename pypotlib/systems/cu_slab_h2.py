@@ -17,7 +17,7 @@ from ase.calculators.calculator import Calculator, all_changes
 import cmcrameri.cm as cmc
 
 from pypotlib import cpot
-from pypotlib.aux import reshape_data
+from pypotlib._aux import reshape_data
 
 FuncVal = namedtuple("FuncVal", ["x", "y", "energy"])
 PltRange = namedtuple("PltRange", ["low", "high"])
