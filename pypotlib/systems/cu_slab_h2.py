@@ -118,7 +118,7 @@ def plt_data(
     return PlotPtPosData(h2pos=plt_h2pos, pltpts=plt_data)
 
 
-def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None):
+def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None, title=None):
     x, y, energy = reshape_data(data)
     # Create a contour plot of the energy surface
     fig, ax = plt.subplots()
@@ -144,9 +144,12 @@ def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None):
     # Add labels and title to the plot
     ax.set_xlabel("H-H distance")
     ax.set_ylabel("Slab distance")
-    ax.set_title(
-        "Energy Surface Contour Plot\nShifted by the zero of the energy"
-    )
+    if title:
+        ax.set_title(title)
+    else:
+        ax.set_title(
+            "Energy Surface Contour Plot\nShifted by the zero of the energy"
+        )
     # Add a colorbar to the plot
     cbar = fig.colorbar(cs)
     # Show the plot
