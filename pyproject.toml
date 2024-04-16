@@ -9,7 +9,7 @@ authors = [
 ]
 # These are only if ase integration is requested, consider a group
 dependencies = [
-    "numpy>=2.0",
+    "numpy",
     "ase>=3.22.1",
     "cmcrameri>=1.8",
     "matplotlib>=3.9.0.dev0",
