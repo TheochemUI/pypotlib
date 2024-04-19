@@ -91,8 +91,8 @@ def calculate_hh_and_hcu_distances(h_positions, ref_atoms):
 
 
 def plt_data(
-    _atms,
-    hh_range=PltRange(low=0.4, high=3),
+    atms,
+    hh_range=PltRange(low=0.4, high=3.8),
     h2slab_range=PltRange(low=-0.05, high=5),
     n_points=PlotPoints(x_npt=60, y_npt=60),
 ):
@@ -100,6 +100,8 @@ def plt_data(
     slab_dists = np.linspace(
         h2slab_range.low, h2slab_range.high, n_points.y_npt
     )
+    _atms = atms.copy()
+    _atms.calc = atms.calc
     h_ind = np.where(np.asarray(_atms.get_chemical_symbols()) == "H")[0]
     plt_data = []  # x, y, energy
     plt_h2pos = []  # h2 positions
@@ -138,7 +140,7 @@ def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None, title=None):
             scatter_points[:, 0],
             scatter_points[:, 1],
             marker="+",
-            color="gray",
+            color="lightgray",
         )
 
     # Add labels and title to the plot
