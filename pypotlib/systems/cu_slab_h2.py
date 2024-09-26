@@ -130,7 +130,7 @@ def contour_plot(data, _max_val=5, _nlvls=500, scatter_points=None, title=None):
         y,
         energy,
         levels=np.linspace(0, _max_val, _nlvls),
-        extend="max",
+        extend="both",
         cmap=cmc.batlow,
     )
     # Scatter
