@@ -7,13 +7,6 @@ description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
 ]
-# These are only if ase integration is requested, consider a group
-dependencies = [
-    "numpy",
-    "ase>=3.22.1",
-    "cmcrameri>=1.8",
-    "matplotlib>=3.9.0.dev0",
-]
 requires-python = ">=3.9"
 readme = "README.md"
 license = {text = "MIT"}
