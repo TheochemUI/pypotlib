@@ -45,9 +45,5 @@ all = {composite = ["lint pypotlib/"]}
 line-length = 80
 target-version = ['py310']
 
-[[tool.pdm.source]]
-name = "nightly-scientific-python"
-url = "https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/"
-verify_ssl = true
-include_packages = ["scipy", "scipy-*", "numpy", "numpy-*", "matplotlib", "matplotlib-*"]
-exclude_packages = ["*"]
+[tool.meson-python.args]
+setup = ['-Dxxhash:cli=false']
