@@ -26,11 +26,12 @@ pkgconf = ">=2.5.1,<3"
 numpy = ">=2.4.1,<3"
 
 [feature.with-ase.dependencies]
-numpy = "*"
-ase = "*"
-cmcrameri = "*"
-matplotlib = "*"
+numpy = ">=2.4.1,<3"
+ase = ">=3.27.0,<4"
+cmcrameri = ">=1.9,<2"
+matplotlib = ">=3.10.8,<4"
 ipython = "*"
+pytest = ">=9.0.2,<10"
 
 [environments]
 with-ase = {features = ["with-ase"]}
