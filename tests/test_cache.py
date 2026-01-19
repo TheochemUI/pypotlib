@@ -1,8 +1,9 @@
-import shutil
 import time
+
 import numpy as np
 import pytest
 from ase import Atoms
+
 from pypotlib import cpot
 from pypotlib.ase_adapters import PyPotLibCalc
 
