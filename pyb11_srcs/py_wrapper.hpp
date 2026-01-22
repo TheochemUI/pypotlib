@@ -7,9 +7,12 @@
 #include <utility>
 
 // Basics
-#include "../subprojects/potlib/CppCore/src/pot_types.hpp"
+#include "../subprojects/potlib/CppCore/rgpot/pot_types.hpp"
 // Bindings
 #include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+// Include the custom AtomMatrix caster
+#include "py_atom_matrix.hpp"
 // Additional
 #include <pybind11/eigen.h>
 #include <pybind11/operators.h>
@@ -26,3 +29,4 @@ void py_pottypes(py::module_ &m);
 void py_potential(py::module_ &m);
 void py_ljpot(py::module_ &m);
 void py_cuh2pot(py::module_ &m);
+void py_cache(py::module_ &m);

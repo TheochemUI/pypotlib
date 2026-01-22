@@ -7,13 +7,6 @@ description = "Python bindings and ASE adapters for potlib"
 authors = [
     {name = "Rohit Goswami", email = "rog32@hi.is"},
 ]
-# These are only if ase integration is requested, consider a group
-dependencies = [
-    "numpy",
-    "ase>=3.22.1",
-    "cmcrameri>=1.8",
-    "matplotlib>=3.9.0.dev0",
-]
 requires-python = ">=3.9"
 readme = "README.md"
 license = {text = "MIT"}
@@ -52,9 +45,5 @@ all = {composite = ["lint pypotlib/"]}
 line-length = 80
 target-version = ['py310']
 
-[[tool.pdm.source]]
-name = "nightly-scientific-python"
-url = "https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/"
-verify_ssl = true
-include_packages = ["scipy", "scipy-*", "numpy", "numpy-*", "matplotlib", "matplotlib-*"]
-exclude_packages = ["*"]
+[tool.meson-python.args]
+setup = ['-Dxxhash:cli=false']

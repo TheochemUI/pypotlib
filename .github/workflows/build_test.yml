@@ -15,9 +15,11 @@ jobs:
         with:
           submodules: "recursive"
           fetch-depth: 0
-      - name: Install Conda environment
-        uses: mamba-org/provision-with-micromamba@main
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          pixi-version: latest
       - name: Build
         shell: bash -l {0}
         run: |
-          pdm build
+          pixi run pdm build

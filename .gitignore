@@ -328,3 +328,6 @@ Temporary Items
 .apdisk
 
 
+# pixi environments
+.pixi/*
+!.pixi/config.toml

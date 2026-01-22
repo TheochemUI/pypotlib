@@ -1,69 +1,101 @@
-# Build on every branch push, tag push, and pull request change:
+# Build on every pull request change:
 # From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml
-name: Build wheels
-on: [push, pull_request]
+name: Build and upload to PyPI
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
 
 jobs:
   build_wheels:
-    name: Build wheel for ${{ matrix.python }}-${{ matrix.buildplat[1] }}
-    runs-on: ${{ matrix.buildplat[0] }}
-    environment: pypi
+    name: Build wheels for ${{ matrix.os }}
+    runs-on: ${{ matrix.runs-on }}
     strategy:
-      # Ensure that a wheel builder finishes even if another fails
-      fail-fast: false
       matrix:
-        # From NumPy
-        # Github Actions doesn't support pairing matrix values together, let's improvise
-        # https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
-        buildplat:
-          - [ubuntu-20.04, manylinux_x86_64]
-          - [ubuntu-20.04, musllinux_x86_64] # No OpenBlas, no test
-          - [macos-12, macosx_x86_64]
-          # - [windows-2019, win_amd64]
-        python: ["cp38", "cp39","cp310", "cp311"]
+        include:
+          - os: linux-intel
+            runs-on: ubuntu-latest
+          - os: linux-arm
+            runs-on: ubuntu-24.04-arm
+          - os: windows-intel
+            runs-on: windows-latest
+          - os: windows-arm
+            runs-on: windows-11-arm
+          - os: macos-intel
+            # macos-15-intel is the last x86_64 runner
+            runs-on: macos-15-intel
+          - os: macos-arm
+            # macos-14+ (including latest) are ARM64 runners
+            runs-on: macos-latest
+          - os: android-intel
+            runs-on: ubuntu-latest
+            platform: android
+          - os: android-arm
+            # GitHub Actions doesn’t currently support the Android emulator on any ARM
+            # runner. So we build on a non-ARM runner, which will skip the tests.
+            runs-on: ubuntu-latest
+            platform: android
+            archs: arm64_v8a
+          - os: ios
+            runs-on: macos-latest
+            platform: ios
+          - os: pyodide
+            runs-on: ubuntu-latest
+            platform: pyodide
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.12.3
+        uses: pypa/cibuildwheel@v3.3.1
         env:
-          CIBW_BUILD: ${{ matrix.python }}-${{ matrix.buildplat[1] }}
+          CIBW_PLATFORM: ${{ matrix.platform || 'auto' }}
+          CIBW_ARCHS: ${{ matrix.archs || 'auto' }}
+        # Can also be configured directly, using `with:`
+        # with:
+        #   package-dir: .
+        #   output-dir: wheelhouse
+        #   config-file: "{package}/pyproject.toml"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
   build_sdist:
     name: Build source distribution
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - name: Build sdist
-        shell: bash -l {0}
         run: pipx run build --sdist
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: cibw-sdist
           path: dist/*.tar.gz
 
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    # upload to PyPI on every tag starting with 'v'
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    # alternatively, to publish when a GitHub Release is created, use the following rule:
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    environment: pypi
+    permissions:
+      id-token: write
+    if: github.event_name == 'release' && github.event.action == 'published'
+    # or, alternatively, upload to PyPI on every tag starting with 'v' (remove on: release above to use this)
+    # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v5
         with:
-          # unpacks default artifact into dist/
-          # if `name: artifact` is omitted, the action will create extra parent dir
-          name: artifact
+          # unpacks all CIBW artifacts into dist/
+          pattern: cibw-*
           path: dist
+          merge-multiple: true
 
       - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+        # To test uploads to TestPyPI, uncomment the following:
+        # with:
+        #   repository-url: https://test.pypi.org/legacy/
